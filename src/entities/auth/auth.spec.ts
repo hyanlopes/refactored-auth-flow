@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Auth } from './auth';
+import { Auth } from './auth.entity';
 
 describe('Auth entity', () => {
   it('Should create a valid Auth', () => {

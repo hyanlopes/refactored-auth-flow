@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { InMemoryUserRepository } from '../../../repositories/user/in-memory/in-memory-user-db';
 import { CreateUserService } from './createUserService';
-import { User } from '../../../entities/user/user';
+import { User } from '../../../entities/user/user.entity';
 
 describe('Testing a creation of user', () => {
   it('Should be possible to create a new user', async () => {

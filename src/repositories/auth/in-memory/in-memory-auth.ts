@@ -1,5 +1,5 @@
 import { IAuthRepository, UpdateOrCreateInput } from '../auth-repository';
-import { Auth } from '../../../entities/auth/auth';
+import { Auth } from '../../../entities/auth/auth.entity';
 
 export class InMemoryAuthRepository implements IAuthRepository {
   public items: Auth[] = [];
