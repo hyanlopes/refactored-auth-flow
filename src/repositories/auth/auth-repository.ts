@@ -1,5 +1,5 @@
-import { Auth } from '../../entities/auth/auth';
-import { User } from '../../entities/user/user';
+import { Auth } from '../../entities/auth/auth.entity';
+import { User } from '../../entities/user/user.entity';
 
 export interface UpdateOrCreateInput {
   newRefreshToken: string;
