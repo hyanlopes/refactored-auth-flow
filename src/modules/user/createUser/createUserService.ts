@@ -1,4 +1,7 @@
+import { plainToClass } from 'class-transformer';
 import { IUserRepository } from '../../../repositories/user/user-repository';
+import { User } from '../../../entities/user/user.entity';
+import { AppError } from '../../../config/errors';
 
 interface IUserRequest {
   name: string;
@@ -15,7 +18,7 @@ export class CreateUserService {
     );
 
     if (hasUserWithEmail) {
-      throw new Error('A user with this email already exists');
+      throw new AppError(407, 'A user with this email already exists');
     }
 
     const user = await this.userRepository.create({
@@ -26,6 +29,6 @@ export class CreateUserService {
 
     await this.userRepository.save(user);
 
-    return user;
+    return plainToClass(User, user);
   }
 }
