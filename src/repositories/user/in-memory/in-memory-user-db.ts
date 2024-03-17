@@ -13,8 +13,10 @@ export class InMemoryUserRepository implements IUserRepository {
     this.items.push(user);
   }
 
-  async verifyDuplicatesEmails(email: string): Promise<void | User> {
-    return this.items.find(({ email: userEmail }) => email === userEmail);
+  async verifyDuplicatesEmails(email: string): Promise<boolean> {
+    return Boolean(
+      this.items.find(({ email: userEmail }) => email === userEmail)
+    );
   }
 
   async findByEmail(email: string): Promise<void | User> {
