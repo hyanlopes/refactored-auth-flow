@@ -1,12 +1,13 @@
 import { AppDataSource } from '../../../config/typeorm/data-source';
-import { User } from '../../../entities/user/user.entity';
+import { UserTypeorm } from '../../../config/typeorm/entities/user';
+
 import { PasswordUtility } from '../../../utils/passwordUtil';
 import { IUserRepository } from '../user-repository';
 
 export class TypeormUserRepository implements IUserRepository {
-  private userRepository = AppDataSource.getRepository(User);
+  private userRepository = AppDataSource.getRepository(UserTypeorm);
 
-  async create(user: User): Promise<User> {
+  async create(user: UserTypeorm): Promise<UserTypeorm> {
     const encryptedPassword = await PasswordUtility.encryptPassword(
       user.password
     );
@@ -19,11 +20,11 @@ export class TypeormUserRepository implements IUserRepository {
     return createUser;
   }
 
-  async save(user: User): Promise<void> {
+  async save(user: UserTypeorm): Promise<void> {
     await this.userRepository.save(user);
   }
 
-  async findByEmail(email: string): Promise<void | User> {
+  async findByEmail(email: string): Promise<void | UserTypeorm> {
     const user = await this.userRepository.findOneBy({
       email
     });

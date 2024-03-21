@@ -1,11 +1,12 @@
 import { IAuthRepository, UpdateOrCreateInput } from '../auth-repository';
-import { Auth } from '../../../entities/auth/auth.entity';
+
 import { AppDataSource } from '../../../config/typeorm/data-source';
+import { AuthTypeorm } from '../../../config/typeorm/entities/auth';
 
 export class TypeormAuthRepository implements IAuthRepository {
-  private authRepository = AppDataSource.getRepository(Auth);
+  private authRepository = AppDataSource.getRepository(AuthTypeorm);
 
-  async create(auth: Auth): Promise<Auth> {
+  async create(auth: AuthTypeorm): Promise<AuthTypeorm> {
     if (!auth.user) {
       throw new Error('User is required');
     }
@@ -15,7 +16,7 @@ export class TypeormAuthRepository implements IAuthRepository {
     return createAuth;
   }
 
-  async save(auth: Auth): Promise<void> {
+  async save(auth: AuthTypeorm): Promise<void> {
     await this.authRepository.save(auth);
   }
 
