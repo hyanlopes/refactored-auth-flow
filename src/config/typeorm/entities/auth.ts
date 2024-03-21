@@ -1,5 +1,11 @@
 import * as uuid from 'uuid';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn
+} from 'typeorm';
 import { UserTypeorm } from './user';
 
 import { Auth } from '../../../entities/auth/auth.entity';
@@ -13,6 +19,7 @@ export class AuthTypeorm implements Auth {
   refreshToken: string;
 
   @OneToOne(() => UserTypeorm, ({ id }) => id, { onDelete: 'CASCADE' })
+  @JoinColumn()
   user?: UserTypeorm;
 
   constructor(data: AuthTypeorm) {
