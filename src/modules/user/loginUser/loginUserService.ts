@@ -1,6 +1,7 @@
 import { IAuthRepository } from '../../../repositories/auth/auth-repository';
 import { IUserRepository } from '../../../repositories/user/user-repository';
 import { JwtUtils } from '../../../utils/jwtUtil';
+import { PasswordUtility } from '../../../utils/passwordUtil';
 
 interface ILoginRequest {
   email: string;
@@ -26,7 +27,12 @@ export class LoginUserService {
       throw new Error('Wrong email or password');
     }
 
-    if (user.password !== password) {
+    const matchPassword = await PasswordUtility.decryptPassword(
+      user.password,
+      password
+    );
+
+    if (!matchPassword) {
       throw new Error('Wrong email or password');
     }
 

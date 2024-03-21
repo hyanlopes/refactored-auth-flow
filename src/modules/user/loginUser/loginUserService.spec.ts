@@ -18,7 +18,7 @@ describe('Testing user login cases', () => {
     );
 
     const user = await createUser.execute({
-      email: 'hyan',
+      email: 'hyan@email.com',
       name: 'hyan',
       password: '1234'
     });
@@ -26,7 +26,7 @@ describe('Testing user login cases', () => {
     expect(
       userServices.execute({
         email: user.email,
-        password: user.password
+        password: '1234'
       })
     ).resolves.toHaveProperty('token');
   });
@@ -43,7 +43,7 @@ describe('Testing user login cases', () => {
     );
 
     const user = await createUser.execute({
-      email: 'hyan',
+      email: 'hyan@email.com',
       name: 'hyan',
       password: '1234'
     });

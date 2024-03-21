@@ -21,9 +21,17 @@ export class TypeormAuthRepository implements IAuthRepository {
   }
 
   async updateOrCreate(data: UpdateOrCreateInput): Promise<void> {
-    const auth = await this.authRepository.findOneBy({
-      user: data.user
+    const auth = await this.authRepository.findOne({
+      where: {
+        user: {
+          id: data.user.id
+        }
+      },
+      relations: {
+        user: true
+      }
     });
+    console.log(auth);
 
     if (!auth) {
       const newAuth = await this.create({
