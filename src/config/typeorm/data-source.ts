@@ -10,13 +10,12 @@ const AppDataSource = new DataSource({
   database: process.env.MYSQLDB_DATABASE,
   synchronize: false,
   logging: false,
-  entities: ['src/entities/**/*.entity.ts'],
-  migrations: ['src/repositories/typeorm/migrations/*.ts']
+  entities: ['src/config/typeorm/entities/*.ts'],
+  migrations: ['src/config/typeorm/migrations/*.ts']
 });
 
-const InitializeDataSource = async () =>
-  await AppDataSource.initialize().catch(err =>
-    console.error('Error during Data Source initialization', err)
-  );
+AppDataSource.initialize().catch(err =>
+  console.error('Error during Data Source initialization', err)
+);
 
-export { AppDataSource, InitializeDataSource };
+export { AppDataSource };
