@@ -31,7 +31,6 @@ export class TypeormAuthRepository implements IAuthRepository {
         user: true
       }
     });
-    console.log(auth);
 
     if (!auth) {
       const newAuth = await this.create({
