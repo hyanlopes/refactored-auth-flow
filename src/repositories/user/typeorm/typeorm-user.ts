@@ -1,5 +1,6 @@
 import { AppDataSource } from '../../../config/typeorm/data-source';
 import { UserTypeorm } from '../../../config/typeorm/entities/user';
+import { User } from '../../../entities/user/user.entity';
 
 import { IUserRepository } from '../user-repository';
 
@@ -39,6 +40,18 @@ export class TypeormUserRepository implements IUserRepository {
         email
       }
     });
+    return user;
+  }
+
+  async findById(id: string): Promise<void | User> {
+    const user = await this.userRepository.findOneBy({
+      id
+    });
+
+    if (!user) {
+      return;
+    }
+
     return user;
   }
 }

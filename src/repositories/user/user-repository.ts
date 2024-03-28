@@ -5,4 +5,5 @@ export interface IUserRepository {
   save(user: User): Promise<void>;
   verifyDuplicatesEmails(email: string): Promise<boolean>;
   findByEmail(email: string): Promise<User | void>;
+  findById(id: string): Promise<User | void>;
 }
